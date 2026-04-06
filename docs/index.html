@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#4A90D9">
+  <title>就活カレンダー</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- ヘッダー -->
+    <header class="header">
+      <h1 class="header__title">🎓 就活カレンダー</h1>
+      <nav class="header__nav">
+        <button class="nav-btn active" data-view="calendar">📅 カレンダー</button>
+        <button class="nav-btn" data-view="list">📋 リスト</button>
+      </nav>
+    </header>
+
+    <!-- カレンダー表示 -->
+    <section id="calendar-view" class="view active">
+      <div class="calendar-header">
+        <button id="prev-month" class="month-btn">◀</button>
+        <h2 id="month-label" class="month-label"></h2>
+        <button id="next-month" class="month-btn">▶</button>
+      </div>
+      <div class="calendar-weekdays">
+        <span class="weekday">月</span>
+        <span class="weekday">火</span>
+        <span class="weekday">水</span>
+        <span class="weekday">木</span>
+        <span class="weekday">金</span>
+        <span class="weekday sat">土</span>
+        <span class="weekday sun">日</span>
+      </div>
+      <div id="calendar-grid" class="calendar-grid"></div>
+      <div class="legend">
+        <span class="legend-item"><span class="dot" style="background:#E74C3C"></span>締切</span>
+        <span class="legend-item"><span class="dot" style="background:#3498DB"></span>インターン</span>
+        <span class="legend-item"><span class="dot" style="background:#2ECC71"></span>面接</span>
+        <span class="legend-item"><span class="dot" style="background:#9B59B6"></span>説明会</span>
+        <span class="legend-item"><span class="dot" style="background:#E67E22"></span>テスト</span>
+      </div>
+      <!-- 日付クリック時の詳細 -->
+      <div id="day-detail" class="day-detail hidden"></div>
+    </section>
+
+    <!-- リスト表示 -->
+    <section id="list-view" class="view">
+      <div class="filter-bar">
+        <select id="type-filter" class="filter-select">
+          <option value="all">すべて</option>
+          <option value="deadline">締切</option>
+          <option value="intern">インターン</option>
+          <option value="interview">面接</option>
+          <option value="seminar">説明会</option>
+          <option value="test">テスト</option>
+        </select>
+      </div>
+      <div id="event-list" class="event-list"></div>
+    </section>
+
+    <!-- ローディング -->
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>読み込み中...</p>
+    </div>
+  </div>
+
+  <script src="js/events.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

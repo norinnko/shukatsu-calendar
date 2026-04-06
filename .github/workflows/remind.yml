@@ -1,0 +1,34 @@
+name: Shukatsu Reminder
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # 毎日 06:00 JST (UTC 21:00)
+  workflow_dispatch:       # 手動実行も可能
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Send reminders
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python server/reminder.py
+
+      - name: Update notified flags
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/events.json
+          git diff --cached --quiet || git commit -m "Update notification flags"
+          git push
