@@ -54,6 +54,7 @@ def handle_message(user_id, text):
 
         except Exception as e:
             print("add_event error:", e)
+            print ("ERROTR:", e)
             return ("❌ 予定の保存に失敗しました。", None)
 
     if text in ["一覧", "来週の予定", "今週の予定"]:
