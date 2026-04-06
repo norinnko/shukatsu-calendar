@@ -2,6 +2,7 @@
 就活カレンダー - メインアプリケーション
 LINE Messaging API Webhook + カレンダー画像配信
 """
+from database import init_db
 import os
 import uuid
 import hashlib
@@ -23,6 +24,7 @@ from linebot.v3.exceptions import InvalidSignatureError
 from line_handler import handle_message
 
 app = Flask(__name__)
+init_db()
 
 # LINE設定
 CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN", "")
