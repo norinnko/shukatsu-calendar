@@ -4,3 +4,4 @@ line-bot-sdk==3.7.0
 requests
 Pillow
 python-dateutil
+openai
